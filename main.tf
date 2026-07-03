@@ -20,3 +20,16 @@ resource "aws_kms_alias" "secure_key_alias" {
   name          = "alias/SecureProjectKeyviaTerraform"
   target_key_id = aws_kms_key.secure_project_key.key_id
 }
+
+resource "aws_ebs_volume" "secure_disk" {
+ availability_zone       = "us-east-1a"
+ size          = 10
+ encrypted     = true
+ kms_key_id    = aws_kms_key.secure_project_key.arn
+
+
+
+tags ={
+ Name = "SecureEBSTerraform"
+ }
+}
